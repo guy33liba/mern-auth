@@ -1,6 +1,6 @@
 import express from "express"
 import mongoose, { mongo } from "mongoose"
-import { router } from "./auth.js"
+import router from "./auth.js"
 import cors from "cors"
 const app = express()
 app.use(express.json())
