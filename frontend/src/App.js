@@ -10,6 +10,7 @@ const App = () => {
   const addUser = () => {
     setContainer((prev) => [...prev, name, email, password])
   }
+  console.log(container)
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "300px" }}>
       <label>name</label>
@@ -36,9 +37,9 @@ const App = () => {
       <button onClick={addUser}>add user</button>
 
       <div>
-        {container.map((user) => {
+        {container.map((user, i) => {
           return (
-            <div>
+            <div key={i}>
               <div>{user.name}</div>
               <div>{user.email}</div>
               <div>{user.password}</div>
