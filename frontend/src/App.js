@@ -8,7 +8,7 @@ const App = () => {
   const [container, setContainer] = useState([])
 
   const addUser = () => {
-    setContainer((prev) => [...prev, name, email, password])
+    setContainer((prev) => [...prev, { name, email, password }])
   }
   console.log(container)
   return (
