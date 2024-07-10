@@ -43,3 +43,4 @@ router.post("/register", async (req, res) => {
     res.status(500).send({ message: "Error registering" })
   }
 })
+export { router }
