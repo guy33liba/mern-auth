@@ -40,7 +40,7 @@ router.post("/register", async (req, res) => {
     await user.save()
     res.status(200).send({ message: "Success register" })
   } catch (error) {
-    res.status(500).send({ message: "Error registering" })
+    res.status(500).send(error)
   }
 })
 export default router
