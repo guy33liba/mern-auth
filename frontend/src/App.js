@@ -1,9 +1,51 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
-import "./App.css"
-function App() {
+import React, { useState } from "react"
+
+const App = () => {
+  const [name, setname] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const [container, setContainer] = useState([])
+
+  const addUser = () => {
+    setContainer((prev) => [...prev, name, email, password])
+  }
   return (
-    <div className="App">
-      <Router></Router>
+    <div style={{ display: "flex", flexDirection: "column", width: "300px" }}>
+      <label>name</label>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setname(e.target.value)}
+        placeholder="name"
+      />
+      <label>email</label>
+      <input
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="email"
+      />
+      <label>password</label>
+      <input
+        type="text"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="password"
+      />
+      <button onClick={addUser}>add user</button>
+
+      <div>
+        {container.map((user) => {
+          return (
+            <div>
+              <div>{user.name}</div>
+              <div>{user.email}</div>
+              <div>{user.password}</div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
