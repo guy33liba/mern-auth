@@ -14,11 +14,9 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(401).json({ error: "Authentication failed try Again" })
     }
-
     const passwordMatch = await bcrypt.compare(password, user.password)
-
     if (!passwordMatch) {
-      return res.status(401).json({ error: "Authentication failed try Again" })
+      return res.status(401).json({ error: "Authentication failed try Again 2" })
     }
 
     // Create a JWT token
@@ -35,7 +33,7 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body
-    const hashedPassword = bcrypt.hash(password, 10)
+    const hashedPassword = await bcrypt.hash(password, 10)
     const user = new User({ name, email, password: hashedPassword })
     await user.save()
     res.status(200).send({ message: "Success register" })
