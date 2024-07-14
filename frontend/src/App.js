@@ -28,6 +28,7 @@ function App() {
   }
 
   const handleLogin = async () => {
+    
     try {
       const response = await axios.post(
         "http://localhost:4000/auth/login",
@@ -37,7 +38,7 @@ function App() {
         },
         { withCredentials: true }
       )
-      setToken(response.data.token)
+      console.log(response.data)
       console.log("Login successful")
     } catch (error) {
       console.error(error.response.data.error)

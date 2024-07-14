@@ -8,23 +8,23 @@ const secretKey = "your-secret-key"
 
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body
-    const user = await User.findOne({ email })
-
-    if (!user) {
+    const { email: userEmail, password: userPassword } = req.body
+    const { name, email, password, _id } = await User.findOne({ email: userEmail })
+    console.log(name, email, password, _id)
+    if (!email) {
       return res.status(401).json({ error: "Authentication failed try Again" })
     }
-    const passwordMatch = await bcrypt.compare(password, user.password)
+    const passwordMatch = await bcrypt.compare(userPassword, password)
     if (!passwordMatch) {
       return res.status(401).json({ error: "Authentication failed try Again 2" })
     }
 
     // Create a JWT token
-    const token = jwt.sign({ userId: user._id, email: user.email }, secretKey, {
+    const token = jwt.sign({ userId: _id, email: email }, secretKey, {
       expiresIn: "1h",
     })
 
-    res.status(200).json({ token, userId: user._id })
+    res.status(200).json({ token, userId: _id, email, name: name })
   } catch (error) {
     res.status(500).json({ error: "Authentication failed try Again" })
   }
